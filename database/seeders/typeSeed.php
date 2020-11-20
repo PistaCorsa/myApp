@@ -23,6 +23,14 @@ class typeSeed extends Seeder
         ]);
 
         DB::table('valueTable')->insert([
+            'value_name'        => 'Cylinder',
+            'value_unit'        => 'CC',
+            'status'            => '1',
+            'created_at'        => date('Y-m-d H:i:s'),
+            'updated_at'        => date('Y-m-d H:i:s'),
+        ]);
+
+        DB::table('valueTable')->insert([
             'value_name'        => 'Inches',
             'value_unit'        => 'inch',
             'status'            => '1',
