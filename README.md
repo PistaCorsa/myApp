@@ -1,24 +1,16 @@
-# Lumen PHP Framework
+## UCC TEST PROJECT
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://img.shields.io/packagist/v/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://img.shields.io/packagist/l/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
+# For this project i'm using Lumen as Microframework in Laravel
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+# Backend REST Services declared in HomeController.php
 
-## Official Documentation
+# Frontend without any frameworks, honestly i'm not to familiar in some of js frontend frameworks.
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+## Run Projects
+# 1. Migrate Database and use Dummy row for fill Type & Value Tables. (php artisan migrate & )
+# 2. Run Project using command (php -S localhost:8000 -t ./public)
+# 3. Access in browser within localhost:8000/form for the main pages.
 
-## Contributing
-
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Backend Services Routes (sceenshot display in folder)
+# 1. REST API Show List Data localhost:8000/showData 
+# 2. REST API Insert Data localhost:8000/insertData
