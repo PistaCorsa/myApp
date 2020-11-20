@@ -49,13 +49,13 @@ class HomeController extends Controller
 
         $this->validate($request, $validateFields, $messages);
 
-        $vName = $request->vehicle_name;
-        $vType = $request->id_type;
-        $vValue = $request->id_value;
-        $enPower = $request->engine_power;
-        $price  = $request->engine_power;
-        $location = $request->location;
-        $enDisVal = $request->engine_displacement_value;
+        $vName      = $request->vehicle_name;
+        $vType      = $request->id_type;
+        $vValue     = $request->id_value;
+        $enPower    = $request->engine_power;
+        $price      = $request->engine_power;
+        $location   = $request->location;
+        $enDisVal   = $request->engine_displacement_value;
 
         
         $checkType = Type::where('status', 1)
