@@ -57,6 +57,7 @@ class HomeController extends Controller
         $location = $request->location;
         $enDisVal = $request->engine_displacement_value;
 
+        
         $checkType = Type::where('status', 1)
                     ->where('id_type', $vType)
                     ->exists();
