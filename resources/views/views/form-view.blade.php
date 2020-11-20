@@ -45,7 +45,7 @@
                     <form action="" method="POST" encypt="multipart" id="myForm">
                         <div class="form-group">
                             <label>Vehicle Name</label>
-                            <input type="text" class="form-input" name="vname" value="" placeholder="Toyota Pajero" required/>
+                            <input type="text" class="form-input" name="vname" value="" placeholder="ex:Toyota Pajero" required/>
                         </div>
                         <div class="form-group">
                             <label>Type</label>
@@ -59,7 +59,7 @@
                             <label>Engine Displacement Value</label>
                             <div class=""> 
                                 <div class="col-xs-6" style="display:inline-block;flex-row:row wrap;">
-                                    <input type="number" class="form-input" name="enDisVal" value="" placeholder="" required/>
+                                    <input type="number" class="form-input" name="enDisVal" value="" placeholder="ex:125" required/>
                                 </div>
                                 <div class="col-xs-6" style="display:inline-block">
                                     <select name="vUnit" style="width:100%">
@@ -72,18 +72,18 @@
                         </div>
                         <div class="form-group">
                             <label>Engine Power (HP)</label>
-                            <input type="number" class="form-input" name="enPower" value="" placeholder="250" min="0" required/>
+                            <input type="number" class="form-input" name="enPower" value="" placeholder="ex:250" min="0" required/>
                         </div>
                         <div class="form-group">
                             <label>Price ($)</label>
-                            <input type="number" class="form-input" name="price" value="" placeholder="3000" min="0" required/>
+                            <input type="number" class="form-input" name="price" value="" placeholder="ex:3000" min="0" required/>
                         </div>
                         <div class="form-group">
                             <label>Location</label>
-                            <textarea name="location" placeholder="Jakarta"></textarea>
+                            <textarea name="location" placeholder="ex:Jakarta"></textarea>
                         </div>
                         
-                        <button type="button" class="btnAdd" id="addBtn"><span>Add</span><span style="display:none"><img src="{{url()}}assets/loader2.svg" style="width:40px"/></span></button>
+                        <button type="button" class="btnAdd" id="addBtn"><span id="textAdd">Add</span><span id="loader" style="display:none"><img src="{{ url() }}/assets/loader3.svg" style="width:25px;"/></span></button>
                     </form>
                 </div>
             </div>
@@ -104,6 +104,10 @@
     // });
     $( document ).ready(function() {
         getList()
+
+        <?php if(count($type) == 0) { ?>
+            alert('Need Value, Please do [ php artisan db:seed --class=NeededRow ] first !')
+        <?php }?>
     });
 
     $('#addBtn').on('click', function() {
@@ -114,6 +118,7 @@
         if(validation === true)
         {
             $("#addBtn").attr('disabled')
+            $("#textAdd").hide()
             $("#loader").show()
 
             $.ajax({
@@ -143,6 +148,7 @@
                     }
 
                     $("#loader").hide()
+                    $("#textAdd").show()
                     $("#addBtn").removeAttr('disabled')
                 }
             });
