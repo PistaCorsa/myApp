@@ -20,3 +20,5 @@ $router->get('/', function () use ($router) {
 $router->get('/showData', 'HomeController@showData');
 $router->post('/insertData', 'HomeController@insertData');
 
+$router->get('/form', 'FormController@index');
+
