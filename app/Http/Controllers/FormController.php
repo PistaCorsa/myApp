@@ -15,7 +15,7 @@ class FormController extends Controller
     {   
         $data = array();
         // GET LIST DATA
-        $data->list = $this->getApi(url().'/showData');
+        // $data->list = $this->getApi(url().'/showData');
 
         return view('views/form-view')->with($data);
     }
