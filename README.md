@@ -7,7 +7,7 @@
 # Frontend without any frameworks, honestly i'm not to familiar in some of js frontend frameworks.
 
 ## Run Projects
-# 1. Migrate Database and use Dummy row for fill Type & Value Tables. (php artisan migrate & )
+# 1. Migrate Database and use Dummy row for fill Type & Value Tables. (php artisan migrate & php artisan db:seed)
 # 2. Run Project using command (php -S localhost:8000 -t ./public)
 # 3. Access in browser within localhost:8000/form for the main pages.
 
