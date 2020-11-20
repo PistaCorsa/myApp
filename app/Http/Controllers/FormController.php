@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Controllers\Controller;
+
 
 class FormController extends Controller
 {
@@ -10,8 +12,12 @@ class FormController extends Controller
      * @return void
      */
     public function index()
-    {
-        return view('views/form-view');
+    {   
+        $data = array();
+        // GET LIST DATA
+        $data->list = $this->getApi(url().'/showData');
+
+        return view('views/form-view')->with($data);
     }
 
 }

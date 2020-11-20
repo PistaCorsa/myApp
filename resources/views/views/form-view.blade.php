@@ -18,8 +18,8 @@
                         <th>EngineId</th>
                         <th>Name</th>
                         <th>Type</th>
-                        <th>Type</th>
-                        <th>Type</th>
+                        <th>Price</th>
+                        <th>Location</th>
                     </tr>
                     </thead>
                     <tbody>
