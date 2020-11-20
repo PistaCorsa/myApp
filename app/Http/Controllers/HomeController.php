@@ -20,7 +20,7 @@ class HomeController extends Controller
         $data = DB::table('engineTable')
                 ->join('valueTable','engineTable.id_value','=' ,'valueTable.id_value')
                 ->join('typeTable','engineTable.id_type','=','typeTable.id_type')
-                ->select('engineTable.id','engineTable.vehicle_name', 'typeTable.type_name','engineTable.engine_displacement_value' , 'valueTable.value_name', 'engineTable.price')
+                ->select('engineTable.id','engineTable.vehicle_name', 'typeTable.type_name','engineTable.engine_displacement_value' , 'valueTable.value_unit', 'engineTable.price', 'engineTable.location')
                 ->get();
 
         return response()->json($data);

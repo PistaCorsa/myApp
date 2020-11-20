@@ -17,12 +17,12 @@
 						<table>
 							<thead>
 								<tr class="row100 head">
-									<th class="cell100 column1">Engine ID</th>
-									<th class="cell100 column2 text-center">Name</th>
-                                    <th class="cell100 column3 text-center">Type</th>
-                                    <th class="cell100 column4 text-center">Displacement Value</th>
-									<th class="cell100 column5 text-center">Price</th>
-									<th class="cell100 column6 text-center">Location</th>
+									<th class="cell100 column2 text-center">Engine ID</th>
+									<th class="cell100 column3 text-center">Vehicle Name</th>
+                                    <th class="cell100 column4 text-center">Type</th>
+                                    <th class="cell100 column5 text-center">Displacement Value</th>
+									<th class="cell100 column6 text-center">Price</th>
+									<th class="cell100 column7 text-center">Location</th>
 								</tr>
 							</thead>
 						</table>
@@ -30,39 +30,8 @@
 
 					<div class="table100-body js-pscroll">
 						<table>
-							<tbody>
-								<tr class="row100 body">
-									<td class="cell100 column1">Like a butterfly</td>
-									<td class="cell100 column2">Boxing</td>
-									<td class="cell100 column3">9:00 AM - 11:00 AM</td>
-									<td class="cell100 column4">Aaron Chapman</td>
-                                    <td class="cell100 column5">10</td>
-                                    <td class="cell100 column5">10</td>
-                                </tr>
-                                <tr class="row100 body">
-									<td class="cell100 column1">Like a butterfly</td>
-									<td class="cell100 column2">Boxing</td>
-									<td class="cell100 column3">9:00 AM - 11:00 AM</td>
-									<td class="cell100 column4">Aaron Chapman</td>
-                                    <td class="cell100 column5">10</td>
-                                    <td class="cell100 column5">10</td>
-                                </tr>
-                                <tr class="row100 body">
-									<td class="cell100 column1">Like a butterfly</td>
-									<td class="cell100 column2">Boxing</td>
-									<td class="cell100 column3">9:00 AM - 11:00 AM</td>
-									<td class="cell100 column4">Aaron Chapman</td>
-                                    <td class="cell100 column5">10</td>
-                                    <td class="cell100 column5">10</td>
-                                </tr>
-                                <tr class="row100 body">
-									<td class="cell100 column1">Like a butterfly</td>
-									<td class="cell100 column2">Boxing</td>
-									<td class="cell100 column3">9:00 AM - 11:00 AM</td>
-									<td class="cell100 column4">Aaron Chapman</td>
-                                    <td class="cell100 column5">10</td>
-                                    <td class="cell100 column5">10</td>
-								</tr>
+							<tbody id="bodyContent">
+                                
 							</tbody>
 						</table>
 					</div>
@@ -73,7 +42,7 @@
             <div class="container">
                 <h2 class="text-center mb20" >Add List</h2>
                 <div class="black-card">
-                    <form action="" method="POST" encypt="multipart" class=>
+                    <form action="" method="POST" encypt="multipart" id="myForm">
                         <div class="form-group">
                             <label>Vehicle Name</label>
                             <input type="text" class="form-input" name="vname" value="" placeholder="Toyota Pajero" required/>
@@ -81,18 +50,22 @@
                         <div class="form-group">
                             <label>Type</label>
                             <select name="vtype">
-                                <option value="1">Cars</option>
+                                @foreach ($type as $ty)
+                                    <option value="{{ $ty->id_type }}">{{ $ty->type_name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Engine Displacement Value</label>
                             <div class=""> 
-                                <div class="col-xs-8" style="display:inline-block;flex-row:row wrap;">
-                                    <input type="text" class="form-input" name="enDisVal" value="" placeholder="" required/>
+                                <div class="col-xs-6" style="display:inline-block;flex-row:row wrap;">
+                                    <input type="number" class="form-input" name="enDisVal" value="" placeholder="" required/>
                                 </div>
-                                <div class="col-xs-4" style="display:inline-block">
+                                <div class="col-xs-6" style="display:inline-block">
                                     <select name="vUnit" style="width:100%">
-                                        <option value="1">CC</option>
+                                        @foreach ($value as $val)
+                                            <option value="{{ $val->id_value }}">{{ $val->value_unit }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
@@ -107,11 +80,10 @@
                         </div>
                         <div class="form-group">
                             <label>Location</label>
-                            <textarea name="location"></textarea>
+                            <textarea name="location" placeholder="Jakarta"></textarea>
                         </div>
                         
-
-                        <input type="submit" value="Add">
+                        <button type="button" class="btnAdd" id="addBtn"><span>Add</span><span style="display:none"><img src="{{url()}}assets/loader2.svg" style="width:40px"/></span></button>
                     </form>
                 </div>
             </div>
@@ -120,37 +92,105 @@
 </body>
 
 </html>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <script type="text/javascript">
     
     // CANCEL
-    document.addEventListener("DOMContentLoaded", function(event) { 
+    // document.addEventListener("DOMContentLoaded", function(event) { 
 
-        getList();
+    //     getList();
 
+    // });
+    $( document ).ready(function() {
+        getList()
+    });
+
+    $('#addBtn').on('click', function() {
+        var validation = $("#myForm").valid();
+        let base_url = '{{ url() }}' + '/'
+
+
+        if(validation === true)
+        {
+            $("#addBtn").attr('disabled')
+            $("#loader").show()
+
+            $.ajax({
+                url		: base_url + 'insertData',
+                data	: {
+                    "vehicle_name":$("input[name=vname]").val(),
+                    "id_type":$("select[name=vtype]").val(),
+                    "id_value":$("select[name=vUnit]").val(),
+                    "engine_power":$("input[name=enPower]").val(),
+                    "engine_displacement_value":$("input[name=enDisVal]").val(),
+                    "price":$("input[name=price]").val(),
+                    "location":$("textarea[name=location]").val()
+                },
+                type    : "POST",
+                async	: true,
+                dataType: 'json',
+                success	: function(data){
+                    console.log(data)
+
+                    if(data.statusCode == 0)
+                    {
+                        alert('Data Success Insert into EID#' + data.data.EngineId)
+                        getList()
+                        document.getElementById("myForm").reset();
+                    } else {
+                        alert(data.message);
+                    }
+
+                    $("#loader").hide()
+                    $("#addBtn").removeAttr('disabled')
+                }
+            });
+        }
     });
 
     function getList()
     {
         let base_url = '{{ url() }}' + '/'
-        var xhttp = new XMLHttpRequest();
-        
-        xhttp.open("GET", base_url + 'showData', true);
-        xhttp.send();
-        xhttp.onload = function() {
-            console.log(xhttp)
 
-            if(this.readyState == 4 && this.status == 200)
-            {
-                if(JSON.parse(this.response) != null)
+        $("#bodyContent").html('<tr>' +
+                                    '<td class="text-center" colspan="6">' +
+                                        '<img src="{{ url() }}/assets/loader2.svg" style="width:120px"/>' +
+                                    '</td>' +
+                                '</tr>')
+        $.ajax({
+            url		: base_url + 'showData',
+            data	: "",
+            async	: true,
+            dataType: 'json',
+            success	: function(data){
+                console.log(data)
+                $("#bodyContent").empty()
+                $("#bodyContent").hide()
+
+                if(data.length > 0)
                 {
-                    // NGEBALIKIN DATA KE HTML
+                    for(isi in data)
+                    {
+                        var unit = data[isi].value_unit;
+                        if(unit === 'cm')
+                        {
+                            unit = 'cm<sup>3</sup>';
+                        }
+                        $("#bodyContent").append(
+                            '<tr class="row100 body">' +
+                                '<td class="cell100 column2 text-center">EID#' + data[isi].id + '</td>' +
+                                '<td class="cell100 column3 text-center">' + data[isi].vehicle_name + '</td>' +
+                                '<td class="cell100 column4 text-center">' + data[isi].type_name + '</td>' +
+                                '<td class="cell100 column5 text-center">' + data[isi].engine_displacement_value + ' ' + unit + '</td>' +
+                                '<td class="cell100 column6 text-center">$ ' + data[isi].price + '</td>' +
+                                '<td class="cell100 column7 text-center">' + data[isi].location + '</td>' +
+                            '</tr>' 
+                        ).fadeIn(1000)
+                    }
                 }
-
-            } else {
-                alert('failed get list data');
             }
-        }
+        });
 
     }
 
